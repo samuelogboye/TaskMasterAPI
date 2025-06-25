@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import tasks
+from app.routers import tasks, users
 
 app = FastAPI(
     title="TaskMaster API",
@@ -21,6 +21,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(tasks.router, prefix="/api/v1/tasks", tags=["tasks"])
+app.include_router(users.router, prefix="/api/v1/users", tags=["users"])
 
 
 @app.get("/")
