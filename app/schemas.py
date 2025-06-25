@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 import html
 from datetime import datetime
@@ -7,7 +7,8 @@ class TaskBase(BaseModel):
     title: str = Field(..., min_length=1, max_length=100)
     description: Optional[str] = Field(None, max_length=500)
 
-    @validator('title', 'description')
+    @field_validator('title', 'description')
+    @classmethod 
     def sanitize_strings(cls, v):
         if v is None:
             return v
@@ -21,4 +22,4 @@ class Task(TaskBase):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
