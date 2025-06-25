@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session
 from app.models import Task
 from app.schemas import TaskCreate
 
-
 class TaskRepository:
     def __init__(self, db: Session):
         self.db = db
@@ -14,7 +13,7 @@ class TaskRepository:
         return self.db.query(Task).filter(Task.id == task_id).first()
 
     def create_task(self, task: TaskCreate):
-        db_task = Task(**task.dict())
+        db_task = Task(**task.model_dump())
         self.db.add(db_task)
         self.db.commit()
         self.db.refresh(db_task)
