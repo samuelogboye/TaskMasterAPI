@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import tasks
@@ -25,3 +26,16 @@ app.include_router(tasks.router, prefix="/tasks", tags=["tasks"])
 @app.get("/")
 async def root():
     return {"message": "Welcome to TaskMaster API"}
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
+
+if __name__ == "__main__":
+    import uvicorn
+    from app.config import settings
+    uvicorn.run(
+        app, 
+        host="0.0.0.0", 
+        port=settings.PORT  # Use port from settings
+    )
