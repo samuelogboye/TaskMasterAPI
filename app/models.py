@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Text, DateTime
+from sqlalchemy import Column, String, Text, DateTime, ForeignKey
 from sqlalchemy.sql import func
 from app.database import Base
 import uuid
@@ -14,6 +14,7 @@ class Task(Base):
     id = Column(String(36), primary_key=True, default=generate_uuid)
     title = Column(String(100), nullable=False)
     description = Column(Text, nullable=True)
+    owner_id = Column(String, ForeignKey("users.id"), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     def __repr__(self):
