@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import tasks, users
+from app.auth import routes as users
+from app.tasks import routes as tasks
 
 app = FastAPI(
     title="TaskMaster API",
