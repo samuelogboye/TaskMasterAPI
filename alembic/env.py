@@ -11,7 +11,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from app.database import Base
-from app.models import Task  # noqa: F401
+from app.tasks.models import Task  # noqa: F401
 from app.auth.models import User  # noqa: F401
 from app.config import settings
 
