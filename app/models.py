@@ -3,8 +3,10 @@ from sqlalchemy.sql import func
 from app.database import Base
 import uuid
 
+
 def generate_uuid():
     return str(uuid.uuid4())
+
 
 class Task(Base):
     __tablename__ = "tasks"
